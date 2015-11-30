@@ -1,0 +1,85 @@
+package checkIfPalindrome;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class CheckIfPalindrome {
+	
+	private JLabel result;
+		
+	public void showUI() {
+		JFrame mainFrame = new JFrame();
+		JPanel mainPanel = new JPanel();	
+		result = new JLabel("Not a palindrome");
+		JTextField input = new JTextField(40);
+		
+		input.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				updateLabel(input);
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+			
+		});
+		
+		mainFrame.add(mainPanel);
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.add(input);
+		mainPanel.add(result);
+			
+		mainFrame.pack();
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setVisible(true);
+	}
+	
+	public void updateLabel(JTextField input) {
+		
+		if(checkPalindrome(input.getText())) {
+			result.setText("Palindrome!");
+		} else {
+			result.setText("Not a palindrome");
+		}
+	}
+	
+	public boolean checkPalindrome(String inputtext) {
+				
+		if(inputtext.toLowerCase().equals(reverseString(inputtext.toLowerCase()))) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public String reverseString(String input) {
+
+		StringBuilder builder = new StringBuilder();
+		
+		for(int i = input.length() - 1; i >= 0; i--) {
+			builder.append(input.charAt(i));
+		}
+		
+		return builder.toString();
+	}
+
+	public static void main(String[] args) {
+		CheckIfPalindrome palindrome = new CheckIfPalindrome();
+		palindrome.showUI();
+	}
+
+}
