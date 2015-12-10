@@ -9,13 +9,24 @@ public class Factorials extends BasicInputProcessor {
 
 		JFrame mainFrame = new JFrame();
 		Factorials factorial = new Factorials();
-		
+		factorial.setProcessButtonText("Get factorial");
 		mainFrame.add(factorial);
 		
 		mainFrame.pack();
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);	
+	}
+	
+	long result = 1;
+	
+	public long getFactorialRecursion(long input) {
+			
+		if(input == 0 || input == 1) {
+			return 1;
+		}
+			
+		return getFactorialRecursion(input-1) * input;		
 	}
 	
 	public long getFactorial(long input) {
