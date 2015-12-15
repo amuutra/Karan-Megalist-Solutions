@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -41,11 +42,7 @@ public class Caesar {
 	}
 	
 	public char getShiftedCharacter(char charToShift) {
-	
-		if(charToShift == ' ') {
-			return ' ';
-		}
-		
+			
 		for(int i = 0; i <= 25; i++) {
 			
 			if (alphabet[i] == charToShift) {
@@ -53,27 +50,20 @@ public class Caesar {
 			}
 			
 		}
-		
-		return ' ';
+		return charToShift;
 	}
 	
 	public char getDeshiftedCharacter(char charToShift) {
 		
-		int index = 0;
-		
-		if(charToShift == ' ') {
-			return ' ';
-		}
-		
-		for(int i = 0; i < 25; i++) {
+
+		for(int i = 0; i <= 25; i++) {
 			
 			if (shiftedAlphabet[i] == charToShift) {
-				index = i;
+				return alphabet[i];
 			}
 			
 		}
-		
-		return alphabet[index];
+		return charToShift;
 	}
 	
 	public String encryptText(String textToEncrypt) {
@@ -143,14 +133,26 @@ public class Caesar {
 		c.gridy = 1;
 		c.gridwidth = 3;
 		
-		encryptButton = new JButton("Encrypt text");
-		
+		encryptButton = new JButton("Encrypt text");	
 		encryptButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setShift(Integer.parseInt(shiftInput.getText()));
-				output.setText(encryptText(input.getText()));
+				
+				try{
+				int newShift = Integer.parseInt(shiftInput.getText());
+				
+				if(newShift <= 0 || newShift > 25) {
+					JOptionPane.showMessageDialog(new JFrame(), "Please enter a number 1-25");
+				} else {
+					setShift(Integer.parseInt(shiftInput.getText()));
+					output.setText(encryptText(input.getText()));
+				}
+				
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(new JFrame(), "That wasn't a valid integer");
+				}
+				
 			}
 			
 		});
@@ -162,13 +164,26 @@ public class Caesar {
 		c.gridwidth = 3;
 
 		decryptButton = new JButton("Decrypt text");
-		
 		decryptButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setShift(Integer.parseInt(shiftInput.getText()));
-				output.setText(decryptText(input.getText()));
+				
+				try{
+					
+				int newShift = Integer.parseInt(shiftInput.getText());
+				
+				if(newShift <= 0 || newShift > 25) {
+					JOptionPane.showMessageDialog(new JFrame(), "Please enter a number 1-25");
+				} else {
+					setShift(Integer.parseInt(shiftInput.getText()));
+					output.setText(decryptText(input.getText()));
+				}
+				
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(new JFrame(), "That wasn't a valid integer");
+				}
+					
 			}
 				
 		});
