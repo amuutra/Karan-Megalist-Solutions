@@ -67,14 +67,14 @@ public abstract class BasicInputProcessor extends JPanel {
 		c.fill = GridBagConstraints.NONE;
 		
 		resultsBelow = new JLabel("Results Below:");
-		JScrollPane scrollingPanel = new JScrollPane(resultsBelow);
-		this.add(scrollingPanel, c);
-		
+		this.add(resultsBelow, c);
+	
 		c.gridx = 0;
 		c.gridy = 3;
 		
 		resultsField = new JTextArea(10, 20);
-		this.add(resultsField, c);
+		JScrollPane scrollingPanel = new JScrollPane(resultsField);
+		this.add(scrollingPanel, c);
 	}
 	
 	public void setProcessButtonText(String buttonText) {
