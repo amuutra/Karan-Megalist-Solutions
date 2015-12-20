@@ -73,6 +73,7 @@ public abstract class BasicInputProcessor extends JPanel {
 		c.gridy = 3;
 		
 		resultsField = new JTextArea(10, 20);
+		resultsField.setLineWrap(true);
 		JScrollPane scrollingPanel = new JScrollPane(resultsField);
 		this.add(scrollingPanel, c);
 	}
